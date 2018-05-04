@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header id="header">
+        <h1 class="logo">
+            <img src="images/jd_03.png" alt="">
+        </h1>
+        <h2 class="header_title">欢迎注册</h2>
+        <div class="account">已有账号？
+            <a href="##">请登录></a>
+        </div>
+    </header>
+    <!-- 主要部分 -->
+    <div class="box">
+        <!-- 表单验证头部 -->
+        <div class="box_out clear">
+            <div class="li active">
+                <div>
+                    <img src="images/jd_07.png" alt="">
+                </div>
+                <p>验证手机号</p>
+            </div>
+            <img class="icon" src="images/jd_09.png" alt="">
+            <div class="li active">
+                <div class="disc">2</div>
+                <p>填写账号信息</p>
+            </div>
+            <img class="icon" src="images/dd_03.png" alt="">
+            <div class="li">
+                <div>3</div>
+                <p>注册成功</p>
+            </div>
+        </div>
+        <!-- 表单内容 -->
+        <div class="form_main">
+            <form action="">
+                <div>
+                    <p>用户名</p>
+                    <input id="user" type="text" placeholder="您的账户名和登录名">
+                    <i>支持中文英文数字下划线“_”“-”组合，4-20个字符</i>
+                </div>
+
+                <div>
+                    <p>设置密码</p>
+                    <input id="pwd" type="password" placeholder="建议使用两种或两种以上的字符组合">
+                    <i>建议使用字母数字和符号两种以上的组合，6-20个字符</i>
+                </div>
+                <span id="grade"></span>
+
+                <div>
+                    <p>确认密码</p>
+                    <input id="pwd2" type="password" placeholder="请再次输入密码">
+                    <i>两次密码输入不一致</i>
+                </div>
+
+                <div>
+                    <p>邮箱验证</p>
+                    <input id="email" type="text" placeholder="请输入邮箱">
+                    <i>验证完之后，您可以使用该邮箱登录</i>
+                </div>
+
+                <div id="yz_email">
+                    <div class="clear">
+                        <p>邮箱验证码</p>
+                        <input id="" type="text" placeholder="请输入邮箱验证码">
+                    </div>
+                    <span>获取邮箱验证码</span>
+                </div>
+
+                <button id="submit" type="submit">立即注册</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <script>
+        var formobj = {
+            user: {
+                el: $("user"),
+                reg: /^[\u4e00-\u9fa5a-z0-9\-_]{4,20}$/i,
+                flag: false
+            },
+            pwd: {
+                el: $("pwd"),
+                reg: /^[a-z0-9\u0021-\u002f]{6,20}$/i,
+                flag: false
+            },
+            email: {
+                el: $("email"),
+                reg: /^\w{6,20}@[0-9a-z]{2,6}\.[a-z]{2,6}$/i,
+                flag: false
+            }
+        }
+        function $(el) {
+            return document.getElementById(el);
+        }
+        var submit = document.getElementById("submit");
+        submit.onclick = function (e) {
+            var evt = e || window.event;
+            for (var attr in formobj) {
+                if (!formobj[attr].flag) {
+                    formobj[attr].el.nextElementSibling.style.display = "block";
+                    formobj[attr].el.nextElementSibling.className = "error";
+                    evt.preventDefault();
+                }
+            }
+        }
+        //用户名验证
+        var userVer = document.getElementById("user");
+        var strReg = formobj.user.reg;
+        userVer.onchange = function () {
+            var string = this.value;
+            addOnlyState(this, strReg.test(string), formobj.user);
+        }
+        //密码验证
+        var pwd = document.getElementById("pwd");
+        var pwreg = formobj.pwd.reg;
+        var ograde = document.getElementById("grade");
+        pwd.onchange = function () {
+            var string = this.value;
+            addOnlyState(this, pwreg.test(string), formobj.pwd);
+            if (!pwreg.test(string)) {
+                ograde.style.display = "none";
+            }
+        }
+        pwd.oninput = function () {
+            var string = this.value;
+            grade(string);
+        }
+        var email = document.getElementById("email");
+        var emailreg = formobj.email.reg;
+        email.onchange = function () {
+            var string = this.value;
+            addOnlyState(this, emailreg.test(string), formobj.email);
+        }
+        function addOnlyState(el, bool, flag) {
+            var i = el.nextElementSibling;
+            i.className = "";
+            if (bool) {
+                i.style.display = "none";
+                flag.flag = true;
+            } else {
+                i.style.display = "block";
+                i.className += "error";
+                flag.flag = false;
+            }
+        }
+        //密码判断安全等级
+        function grade(string) {
+            var count = 0;
+            if (/\d+/g.test(string)) {
+                count++;
+            }
+            if (/[\u0021-\u002f]+/g.test(string)) {
+                count++;
+            }
+            if (/[a-z]+/ig.test(string)) {
+                count++;
+            }
+            ograde.innerHTML = "密码强度为" + count + "级";
+            ograde.style.display = "block";
+        }
+        var form_main = document.querySelector(".form_main");
+        var oinput = form_main.getElementsByTagName("input");
+        console.log(oinput);
+        for (var i = 0; i < oinput.length; i++) {
+            oinput[i].onfocus = function () {
+                this.nextElementSibling.style.display = "block";
+            }
+            oinput[i].onblur = function () {
+                if (this.value == "") {
+                    this.nextElementSibling.style.display = "none";
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

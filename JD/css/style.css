@@ -1,0 +1,130 @@
+.box{
+    width: 400px;
+    margin: 0 auto;
+}
+.box_out{
+    margin-top: 90px;
+}
+.box_out .li{
+    float: left;
+    width: 26px;
+    text-align: center;
+}
+.box_out .icon{
+    float: left;
+    margin: 9px 18px 0;
+}
+.box_out .li div{
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    border: 1px #dcdcdc solid;
+    line-height: 24px;
+    font-size: 14px;
+}
+.box_out .li p{
+    width: 100px;
+    margin-left: -36px;
+    margin-top: 15px;
+}
+.box_out .li.active{
+    color: #33bb44;
+}
+.box_out .li.active div{
+    border: 1px #33bb44 solid;
+}
+.box_out .li.active div.disc{
+    border: 1px #33bb44 solid;
+    background: #33bb44;
+    color: #fff;
+}
+
+/* 表单主体部分 */
+.form_main form>div{
+    width: 400px;
+    height: 50px;
+    border: 1px #dddddd solid;
+    color: #999999;
+    margin-top: 32px;
+    line-height: 50px;
+    font-size: 14px;
+    position: relative;
+}
+.form_main form>div:hover,#yz_email div:hover,#yz_email span:hover{
+    border: 1px #999999 solid;
+}
+.form_main form>div p{
+    float: left;
+    width: 70px;
+    height: 50px;
+    text-align: justify;
+    margin-left: 20px;
+
+}
+.form_main form>div p:after{  
+    display:inline-block;  
+    content:'';  
+    overflow:hidden;  
+    width:100%;  
+    height:0;  
+} 
+.form_main form>div input{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    border: 0;
+    width: 270px;
+    margin-left: 36px;
+    color: #000;
+}
+.form_main form>div input::-webkit-input-placeholder{
+    color: #cccccc;
+}
+/* 输入验证码部分 */
+#yz_email{
+    border: 0;
+    width: 402px;
+}
+#yz_email div{
+    width: 280px;
+    border: 1px #ddd solid;
+    float: left;
+}
+#yz_email input{
+    width: 153px;
+}
+#yz_email span{
+    width: 119px;
+    height: 50px;
+    display: block;
+    float: right;
+    border: 1px #ddd solid;
+    text-align: center;
+    margin-left: -1px;
+    cursor: pointer;
+}
+.form_main button{
+    width: 402px;
+    height: 50px;
+    border-radius: 4px;
+    border: 0;
+    margin-top: 34px;
+    background: #e2231a;
+    color: #fff;
+    font-size: 20px;
+}
+.form_main form>div i{
+    position: absolute;
+    bottom: -22px;
+    left: 0;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    display: none;
+}
+.form_main form>div i.error{
+    color: orange;
+}
+#grade{
+    margin-top: 20px;
+}
